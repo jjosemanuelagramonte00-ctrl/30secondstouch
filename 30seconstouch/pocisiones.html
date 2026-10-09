@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clasificaciones Completas - 30SecondsTouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+
+<style>
+  /* Maquetación específica en dos columnas para esta página usando tus estilos */
+  .ranking-page-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Hacemos que las listas tengan scroll interno si superan los 10 jugadores */
+  .ranking {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  /* Scrollbar retro que combina con tu estilo */
+  .ranking::-webkit-scrollbar { width: 6px; }
+  .ranking::-webkit-scrollbar-track { background: #0c0500; }
+  .ranking::-webkit-scrollbar-thumb { background: #ff8c00; border-radius: 3px; }
+
+  @media (max-width: 992px) {
+    .ranking-page-grid { grid-template-columns: 1fr; padding: 20px; }
+  }
+</style>
+<script src="js/proteccion.js"></script>
+</head>
+
+<body class="guest">
+
+<header class="nav">
+  <div class="logo">
+    <span class="logo-30">30</span>
+    <div class="logo-text">
+      <div class="logo-seconds">SECONDS</div>
+      <div class="logo-touch">TOUCH</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="index.html">INICIO</a>
+    <a href="index.html">JUGAR</a>
+    <a href="perfil.html">MI PERFIL</a>
+    <a href="#" class="active">RANKING</a>
+    <a href="estadisticas.html">ESTADÍSTICAS</a>
+    <a href="#">LOGROS</a>
+    <a href="noticias.html">NOTICIAS</a>
+    <a href="#">TIENDA</a>
+  </nav>
+  
+  <div id="guestButtons">
+    <button class="btn-outline" id="loginBtn">INICIAR SESIÓN</button>
+    <button class="btn-primary" id="registerBtn">REGISTRARSE</button>
+  </div>
+
+  <div id="userPanel" style="display:none;">
+    <img id="userPhoto" src="" alt="Perfil">
+    <span id="userName"></span>
+    <button class="btn-primary" id="logoutBtn">CERRAR SESIÓN</button>
+  </div>
+</header>
+
+<main class="ranking-page-grid">
+    
+    <div class="panel">
+      <div class="panel-head">
+        <h3>TOP GLOBAL COMPLETO</h3>
+      </div>
+      <ul class="ranking" id="globalPlayersList">
+        <li><span class="name" style="color: var(--text-muted);">Cargando clasificación mundial...</span></li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3>GUERRA GLOBAL DE PAÍSES</h3>
+      </div>
+      <ul class="ranking" id="countriesList">
+        <li><span class="name" style="color: var(--text-muted);">Cargando países...</span></li>
+      </ul>
+    </div>
+
+</main>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+
+<script type="module">
+    import { generarEmojiBandera, suscribirseARankingCombinado, calcularRankingPorPaises } from './js/ranking-common.js';
+    import { auth } from './js/firebase.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const globalPlayersList = document.getElementById('globalPlayersList');
+        const countriesList = document.getElementById('countriesList');
+        let currentUid = null;
+
+        onAuthStateChanged(auth, (user) => {
+            currentUid = user ? user.uid : null;
+        });
+
+        // Nombres de países para mostrar junto a la bandera
+        const NOMBRES_PAISES = {
+            AR: "Argentina", MX: "México", CO: "Colombia", CL: "Chile", PE: "Perú",
+            ES: "España", VE: "Venezuela", IT: "Italia", UY: "Uruguay", PY: "Paraguay",
+            BR: "Brasil", EC: "Ecuador", BO: "Bolivia", US: "Estados Unidos"
+        };
+
+        // 1. RANKING GLOBAL COMPLETO: usuarios reales + bots de relleno mientras haya <30 cuentas
+        suscribirseARankingCombinado((listaCombinada) => {
+
+            // -- Tabla de jugadores --
+            globalPlayersList.innerHTML = "";
+            if (listaCombinada.length === 0) {
+                globalPlayersList.innerHTML = `<li><span class="name" style="color: var(--text-muted);">No hay registros de jugadores todavía.</span></li>`;
+            } else {
+                listaCombinada.forEach((jugador, index) => {
+                    const posicion = index + 1;
+                    const esElUsuarioActual = currentUid && jugador.uid === currentUid;
+                    const nombre = jugador.username || jugador.name || "Jugador Anónimo";
+                    const pais = jugador.countryCode ? jugador.countryCode.toUpperCase() : "";
+                    const bandera = generarEmojiBandera(pais);
+                    const nombreFinal = pais ? `${nombre} (${pais})` : nombre;
+
+                    const li = document.createElement('li');
+                    if (esElUsuarioActual) {
+                        li.style.background = "rgba(255, 106, 31, 0.1)";
+                        li.style.borderRadius = "6px";
+                        li.style.padding = "6px 8px";
+                    }
+                    li.innerHTML = `
+                        <span class="pos">#${posicion}</span>
+                        <span class="flag">${esElUsuarioActual ? "🔥" : bandera}</span>
+                        <span class="name">${nombreFinal}${esElUsuarioActual ? ' <span style="color: var(--orange); font-size: 11px; font-weight: bold;">(TÚ)</span>' : ''}</span>
+                        <span class="score">${(jugador.bestScore || 0).toLocaleString()}</span>
+                    `;
+                    globalPlayersList.appendChild(li);
+                });
+            }
+
+            // -- Ranking real de países, calculado sobre la misma lista --
+            const paises = calcularRankingPorPaises(listaCombinada);
+            countriesList.innerHTML = "";
+            if (paises.length === 0) {
+                countriesList.innerHTML = `<li><span class="name" style="color: var(--text-muted);">Todavía no hay datos de países.</span></li>`;
+            } else {
+                paises.forEach((pais, index) => {
+                    const li = document.createElement('li');
+                    const nombrePais = NOMBRES_PAISES[pais.code] || pais.code;
+                    li.innerHTML = `
+                        <span class="pos">#${index + 1}</span>
+                        <span class="flag">${generarEmojiBandera(pais.code)}</span>
+                        <span class="name">${nombrePais} <small style="color:var(--text-muted);">(${pais.jugadores} jugadores)</small></span>
+                        <span class="score">${pais.totalScore.toLocaleString()}</span>
+                    `;
+                    countriesList.appendChild(li);
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

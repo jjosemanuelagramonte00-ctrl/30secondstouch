@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30 Seconds Touch - ESTADÍSTICAS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/estadisticas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<script src="js/proteccion.js"></script>
+</head>
+<body class="stats-body">
+
+  <div class="stats-container">
+    <header class="stats-header">
+      <h1 class="stats-title">CENTRO DE DATOS</h1>
+      <p id="userNameDisplay" class="user-id-tag">CARGANDO AGENTE...</p>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">⚔️</div>
+        <div class="stat-value" id="statPvpWins">0</div>
+        <div class="stat-label">VICTORIAS PVP</div>
+      </div>
+
+      <div class="stat-card gold-border">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-value" id="statGlobalRank">#--</div>
+        <div class="stat-label">RANGO MUNDIAL</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value" id="statGroupPos">--/--</div>
+        <div class="stat-label">POSICIÓN GRUPO</div>
+        <small id="groupName" class="sub-label">SIN GRUPO ACTIVO</small>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-value" id="statChallengeDay">1</div>
+        <div class="stat-label">DÍA DE DESAFÍO</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div class="stat-value" id="statCoins">0</div>
+        <div class="stat-label">MONEDAS TOTALES</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-value" id="statBestScore">0</div>
+        <div class="stat-label">RÉCORD PERSONAL</div>
+      </div>
+    </div>
+
+    <footer class="stats-footer">
+        <button onclick="window.location.href='index.html'" class="btn-back-stats">VOLVER AL MENÚ</button>
+    </footer>
+  </div>
+
+  <script type="module" src="js/estadisticas.js"></script>
+</body>
+</html>

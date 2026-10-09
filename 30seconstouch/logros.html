@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Logros - 30SecondsTouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/logoros.css" />
+<script src="js/pantalla-completa.js"></script>
+<script src="js/proteccion.js"></script>
+</head>
+
+<body class="guest">
+
+<header class="nav">
+  <div class="logo">
+    <span class="logo-30">30</span>
+    <div class="logo-text">
+      <div class="logo-seconds">SECONDS</div>
+      <div class="logo-touch">TOUCH</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="index.html">INICIO</a>
+    <a href="index.html">JUGAR</a>
+    <a href="perfil.html">MI PERFIL</a>
+    <a href="pocisiones.html">RANKING</a>
+    <a href="estadisticas.html">ESTADÍSTICAS</a>
+    <a href="#" class="active">LOGROS</a>
+    <a href="noticias.html">NOTICIAS</a>
+    <a href="#">TIENDA</a>
+  </nav>
+  
+  <div id="guestButtons">
+    <button class="btn-outline" id="loginBtn">INICIAR SESIÓN</button>
+    <button class="btn-primary" id="registerBtn">REGISTRARSE</button>
+  </div>
+
+  <div id="userPanel" style="display:none;">
+    <img id="userPhoto" src="" alt="Perfil">
+    <span id="userName"></span>
+    <button class="btn-primary" id="logoutBtn">CERRAR SESIÓN</button>
+  </div>
+</header>
+
+<main class="achievements-container">
+    <div class="grid-bg"></div>
+    
+    <header class="achievements-header">
+        <h1>SISTEMA DE TROFEOS</h1>
+        <p>DESBLOQUEA LOGROS PARA DEMOSTRAR TU SUPREMACÍA. <span id="unlockedCount">0/50</span> COMPLETADOS</p>
+        
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 0%"></div>
+        </div>
+    </header>
+
+    <div class="achievements-grid" id="achievementsGrid">
+        </div>
+</main>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+
+<script type="module">
+import { auth, db } from "./js/firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("achievementsGrid");
+    const progressFill = document.querySelector(".progress-bar-fill");
+
+    // Base de logros manuales, conectados a datos reales del jugador
+    const baseAchievements = [
+        { id: 1, title: "Primer Toque", desc: "Haz tu primer clic en el círculo naranja.", icon: "🎯", xp: 10, check: (d) => (d.totalClicks || 0) > 0 },
+        { id: 2, title: "Calentando Motores", desc: "Completa tu primera partida de 30 segundos.", icon: "⏱️", xp: 20, check: (d) => (d.gamesPlayed || 0) > 0 },
+        { id: 3, title: "Velocidad Crucero", desc: "Alcanza una puntuación de 100 clics.", icon: "⚡", xp: 50, check: (d) => (d.bestScore || 0) >= 100 },
+        { id: 4, title: "Precisión Quirúrgica", desc: "Alcanza más del 95% de precisión global.", icon: "🎯", xp: 100, check: (d) => (d.accuracy || 0) >= 95 },
+        { id: 5, title: "Primer Logueo", desc: "Vincula tu cuenta de Google para guardar tus récords.", icon: "🔑", xp: 15, check: (d) => true },
+        { id: 6, title: "Rompiendo Barreras", desc: "Alcanza los 200 clics en una sola partida.", icon: "🔥", xp: 120, check: (d) => (d.bestScore || 0) >= 200 },
+        { id: 7, title: "Inmortal", desc: "Juega 50 partidas totales.", icon: "👑", xp: 200, check: (d) => (d.gamesPlayed || 0) >= 50 },
+        { id: 8, title: "Comerciante Arcade", desc: "Acumula 5.000 monedas en tu cuenta.", icon: "🪙", xp: 50, check: (d) => (d.coins || 0) >= 5000 },
+    ];
+
+    // Autocompletar la lista con hitos de clics acumulados hasta llegar a 50
+    const allAchievements = [...baseAchievements];
+    for (let i = allAchievements.length + 1; i <= 50; i++) {
+        let clickMilestone = i * 25;
+        allAchievements.push({
+            id: i,
+            title: `Hito de Clics IV-${i}`,
+            desc: `Logra realizar un acumulado total de ${clickMilestone.toLocaleString()} clics en tus estadísticas.`,
+            icon: "👾",
+            xp: i * 10,
+            check: (d) => (d.totalClicks || 0) >= clickMilestone
+        });
+    }
+
+    function renderizarLogros(userData) {
+        grid.innerHTML = "";
+        let desbloqueados = 0;
+
+        allAchievements.forEach(ach => {
+            const unlocked = userData ? !!ach.check(userData) : false;
+            if (unlocked) desbloqueados++;
+
+            const card = document.createElement("div");
+            card.className = `ach-card ${unlocked ? 'unlocked' : 'locked'}`;
+            card.setAttribute("data-id", ach.id);
+
+            card.innerHTML = `
+                <div class="ach-icon-box">
+                    <span class="ach-icon">${ach.icon}</span>
+                </div>
+                <div class="ach-info">
+                    <h3 class="ach-title">${ach.title}</h3>
+                    <p class="ach-desc">${ach.desc}</p>
+                    <span class="ach-xp">+${ach.xp} XP</span>
+                </div>
+                <div class="ach-status-badge">${unlocked ? "🔓" : "🔒"}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        if (progressFill) {
+            const porcentaje = Math.round((desbloqueados / allAchievements.length) * 100);
+            progressFill.style.width = `${porcentaje}%`;
+        }
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+        if (!user) {
+            renderizarLogros(null);
+            return;
+        }
+        try {
+            const snap = await getDoc(doc(db, "users", user.uid));
+            renderizarLogros(snap.exists() ? snap.data() : null);
+        } catch (err) {
+            console.error("Error cargando logros:", err);
+            renderizarLogros(null);
+        }
+    });
+});
+</script>
+</body>
+</html>

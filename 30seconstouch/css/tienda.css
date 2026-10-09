@@ -1,0 +1,159 @@
+/* --- COMPORTAMIENTO GENERAL --- */
+.store-container {
+    position: relative;
+    padding: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 85vh;
+}
+
+/* Cabecera y Balance */
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed rgba(255, 140, 0, 0.2);
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+}
+.store-header h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 26px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+    margin: 0 0 8px 0;
+}
+.store-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #d1b28d;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Marcador de Monedas */
+.coin-balance {
+    background: #0f0802;
+    border: 2px solid #ff8c00;
+    border-radius: 6px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.2);
+}
+.coin-icon { font-size: 28px; animation: float 3s ease-in-out infinite; }
+.balance-text { display: flex; flex-direction: column; }
+.balance-text small { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: #bfa382; font-weight: 700; }
+.balance-text strong { font-family: 'Press Start 2P', monospace; font-size: 18px; color: #fff; }
+
+/* --- DISEÑO DE LAS SECCIONES --- */
+.section-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: #ff8c00;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Tarjeta Premium Deslumbrante */
+.premium-card {
+    background: linear-gradient(135deg, rgba(12, 5, 0, 0.95) 0%, rgba(40, 20, 0, 0.8) 100%);
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.25);
+    border-radius: 8px;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 40px;
+}
+.premium-badge {
+    position: absolute; top: -12px; left: 30px;
+    background: #ffcc00; color: #000;
+    font-family: 'Press Start 2P', monospace; font-size: 10px; font-weight: 900;
+    padding: 4px 10px; border-radius: 4px;
+}
+.premium-content { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+.premium-info h3 { font-family: 'Press Start 2P', monospace; font-size: 20px; color: #fff; text-shadow: 0 0 10px #ffcc00; margin: 0 0 10px 0; }
+.premium-info p { font-family: 'Space Grotesk', sans-serif; color: #d1b28d; margin: 0 0 15px 0; font-size: 15px; }
+.premium-benefits { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.premium-benefits li { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; color: #fff; }
+
+.premium-buy-box { display: flex; flex-direction: column; gap: 10px; width: 280px; flex-shrink: 0; }
+.btn-buy-real { background: #ffcc00; color: #000; border: none; font-family: 'Space Grotesk', sans-serif; font-weight: 700; padding: 14px; font-size: 14px; border-radius: 4px; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); }
+.btn-buy-real:hover { background: #fff; box-shadow: 0 0 25px #fff; }
+.divider-text { text-align: center; font-family: 'Press Start 2P', monospace; font-size: 9px; color: #bfa382; }
+.btn-buy-coins { background: transparent; border: 2px solid #ff8c00; color: #ff8c00; font-family: 'Space Grotesk', sans-serif; font-weight: 700; padding: 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+.btn-buy-coins:hover { background: #ff8c00; color: #000; }
+
+/* --- REJILLA COMÚN DE PRODUCTOS --- */
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 30px;
+}
+.items-list { display: flex; flex-direction: column; gap: 15px; }
+
+/* Tarjeta de Producto */
+.shop-item {
+    background: rgba(12, 5, 0, 0.85);
+    border: 2px solid rgba(255, 140, 0, 0.3);
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s ease;
+}
+.shop-item:hover {
+    border-color: #ff8c00;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.15);
+}
+
+/* Previsualizadores Visuales */
+.item-preview { width: 55px; height: 55px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); }
+.theme-cyan { background: linear-gradient(135deg, #001f26 0%, #00ccff 100%); }
+.theme-pink { background: linear-gradient(135deg, #26001a 0%, #ff00aa 100%); }
+.theme-matrix { background: linear-gradient(135deg, #001a05 0%, #00ff33 100%); }
+
+.item-avatar { width: 55px; height: 55px; background: #140b02; border: 1px dashed #ff8c00; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+
+/* Detalles e info interna */
+.item-details { display: flex; flex-direction: column; flex-grow: 1; gap: 4px; }
+.item-details h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #fff; margin: 0; }
+.item-details p { font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 500; color: #bfa382; margin: 0; line-height: 1.3; padding-right: 10px; }
+
+/* Botón de compra genérico */
+.btn-purchase {
+    align-self: flex-start;
+    background: #1a0f07;
+    border: 1px solid #ff8c00;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+.btn-purchase:hover {
+    background: #ff8c00;
+    color: #000;
+    box-shadow: 0 0 10px #ff8c00;
+}
+
+/* Animación Flotar Moneda */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .premium-content { flex-direction: column; gap: 20px; }
+    .premium-buy-box { width: 100%; }
+    .premium-benefits { grid-template-columns: 1fr; }
+    .store-header { flex-direction: column; gap: 20px; text-align: center; }
+}

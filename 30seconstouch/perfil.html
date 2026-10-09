@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perfil - 30SecondsTouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght=500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/perfil.css" />
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/elperfil.js"></script>
+<script src="js/pantalla-completa.js"></script>
+<script src="js/proteccion.js"></script>
+</head>
+
+<body class="guest">
+
+<header class="nav">
+  <div class="logo">
+    <span class="logo-30">30</span>
+    <div class="logo-text">
+      <div class="logo-seconds">SECONDS</div>
+      <div class="logo-touch">TOUCH</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="index.html">INICIO</a>
+    <a href="index.html">JUGAR</a>
+    <a href="pocisiones.html">RANKING</a>
+    <a href="estadisticas.html">ESTADÍSTICAS</a>
+    <a href="logros.html">LOGROS</a>
+    <a href="noticias.html">NOTICIAS</a>
+    <a href="tienda.html">TIENDA</a>
+  </nav>
+  
+  <div id="guestButtons">
+    <button class="btn-outline" id="loginBtn">INICIAR SESIÓN</button>
+    <button class="btn-primary" id="registerBtn">REGISTRARSE</button>
+  </div>
+
+  <div id="userPanel" style="display:none;">
+    <img id="userPhoto" src="" alt="Perfil" class="active-profile-nav">
+    <span id="userName"></span>
+    <button class="btn-primary" id="logoutBtn">CERRAR SESIÓN</button>
+  </div>
+</header>
+
+<main class="profile-container">
+    <div class="grid-bg"></div>
+
+    <!-- TARJETA PRINCIPAL DE INFORMACIÓN -->
+    <section class="profile-card">
+        <div class="profile-avatar-wrapper">
+            <img id="profileCardPhoto" src="img/default-avatar.png" alt="Avatar">
+            <span class="premium-tag" id="profilePremiumTag" style="display: none;">PREMIUM</span>
+            <span class="edit-avatar-hint">✏️</span>
+        </div>
+        <div class="profile-info-text">
+            <h1 id="profileCardName">CARGANDO PILOTO...</h1>
+            <p class="profile-email" id="profileCardEmail">---</p>
+            <button class="btn-outline-small" id="editNameBtn" type="button" style="margin:6px 0 10px;">✏️ CAMBIAR MI NOMBRE</button>
+            <div class="profile-stats-mini">
+                <div class="stat-box">
+                    <small>MONEDAS</small>
+                    <strong id="profileCoins">🪙 0</strong>
+                </div>
+                <div class="stat-box">
+                    <small>RECORD PERSONAL</small>
+                    <strong id="profileHighScore">0 PTS</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DE CONFIGURACIÓN: SE ABRE AL TOCAR LA FOTO -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-modal-box">
+            <button class="settings-close" id="closeSettingsBtn">✕</button>
+            <h2 class="settings-title">⚙️ CONFIGURACIÓN</h2>
+
+            <div class="settings-section">
+                <label class="settings-label">NOMBRE DE USUARIO</label>
+                <div class="settings-row">
+                    <input type="text" id="usernameInput" maxlength="18" placeholder="Tu nombre en el juego">
+                    <button class="btn-outline-small" id="randomNameBtn" type="button" title="Nombre aleatorio">🎲</button>
+                    <button class="btn-primary" id="saveUsernameBtn">GUARDAR NOMBRE</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <label class="settings-label">MI GRUPO</label>
+                <div id="groupInfoBox" style="display:none;"></div>
+                <div id="groupFormBox">
+                    <div class="settings-row">
+                        <input type="text" id="groupNameInput" maxlength="20" placeholder="Nombre de grupo nuevo">
+                        <button class="btn-outline-small" id="createGroupBtn">CREAR</button>
+                    </div>
+                    <div class="settings-row">
+                        <input type="text" id="groupCodeInput" maxlength="6" placeholder="Código para unirte">
+                        <button class="btn-outline-small" id="joinGroupBtn">UNIRME</button>
+                    </div>
+                </div>
+            </div>
+
+            <p id="settingsFeedback" class="settings-feedback"></p>
+
+            <button class="btn-outline" id="settingsLogoutBtn" style="width:100%; margin-top:10px;">CERRAR SESIÓN</button>
+        </div>
+    </div>
+
+    <!-- CONTROL DE INVENTARIO -->
+    <section class="inventory-section">
+        <h2 class="section-title">🎒 TU INVENTARIO ARCADE</h2>
+        
+        <!-- Pestañas de Filtrado Rápido -->
+        <div class="inventory-tabs">
+            <button class="tab-btn active" data-target="all">TODO</button>
+            <button class="tab-btn" data-target="theme">TEMAS (SKINS)</button>
+            <button class="tab-btn" data-target="pet">MASCOTAS</button>
+            <button class="tab-btn" data-target="fx">EFECTOS</button>
+            <button class="tab-btn" data-target="consumable">ITEMS</button>
+        </div>
+
+        <!-- Rejilla donde se inyectan los items comprados -->
+        <div class="inventory-grid" id="inventoryGrid">
+            <div class="no-items-msg">Buscando tus pertenencias en el servidor remoto...</div>
+        </div>
+    </section>
+</main>
+
+
+</body>
+</html>

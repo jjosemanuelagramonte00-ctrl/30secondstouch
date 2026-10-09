@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30 Seconds Touch - PVP MODE</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pvp.css">
+  <script type="module" src="js/pvp.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<script src="js/proteccion.js"></script>
+</head>
+<body class="pvp-body">
+
+  <div id="pvpMenu" class="pvp-menu-overlay">
+    <div class="pvp-menu-card">
+      <h1 class="pvp-title">MODO COMBATE</h1>
+      <p class="pvp-subtitle">Selecciona tu campo de batalla</p>
+      
+      <div class="pvp-options-grid">
+        <div class="pvp-card" id="btnPvpLocal">
+          <div class="card-icon">👥</div>
+          <h3>PVP LOCAL</h3>
+          <p>Mismo dispositivo. Pantalla dividida en dos.</p>
+          <span class="badge">CONEXIÓN INSTANTÁNEA</span>
+        </div>
+
+        <div class="pvp-card" id="btnPvpOnline">
+          <div class="card-icon">🌐</div>
+          <h3>PVP ONLINE</h3>
+          <p>Crea o únete a una sala con código en tiempo real.</p>
+          <span class="badge online">online</span>
+        </div>
+      </div>
+
+      <button onclick="window.location.href='index.html'" class="btn-back-main">VOLVER AL MENÚ PRINCIPAL</button>
+    </div>
+  </div>
+
+  <div id="pvpModeSelection" class="pvp-menu-overlay hidden">
+    <div class="pvp-menu-card">
+      <h1 class="pvp-title">MODO DE JUEGO</h1>
+      <p class="pvp-subtitle">¿Cómo quieren definir el duelo?</p>
+      
+      <div class="pvp-options-grid">
+        <div class="pvp-card" id="btnModeClassic">
+          <div class="card-icon">⏱️</div>
+          <h3>CLÁSICO</h3>
+          <p>30 segundos de pura velocidad. Gana quien haga más clics.</p>
+          <span class="badge">TRADICIONAL</span>
+        </div>
+
+        <div class="pvp-card" id="btnModeMatch">
+          <div class="card-icon">⚽</div>
+          <h3>PARTIDO</h3>
+          <p>90 segundos. Cada 10s se evalúa un "Gol" al que sume más toques. Prórroga en caso de empate.</p>
+          <span class="badge online">FÚTBOL ARCADE</span>
+        </div>
+      </div>
+
+      <button id="btnBackToConnection" class="btn-back-main">VOLVER</button>
+    </div>
+  </div>
+
+  <div id="onlineSetupPanel" class="pvp-menu-overlay hidden">
+    <div class="pvp-menu-card setup-card">
+      <h2 class="setup-title">SALA MULTIJUGADOR</h2>
+      
+      <div class="setup-actions">
+        <div class="setup-box">
+          <h3>CREAR PARTIDA</h3>
+          <button id="btnCreateRoom" class="btn-setup-action">GENERAR CÓDIGO</button>
+          <div id="roomCodeDisplay" class="code-display hidden">CÓDIGO: <span id="generatedCode">------</span></div>
+        </div>
+
+        <div class="divider-v"></div>
+
+        <div class="setup-box">
+          <h3>UNIRSE A PARTIDA</h3>
+          <input type="text" id="inputRoomCode" placeholder="INGRESA EL CÓDIGO" maxlength="6">
+          <button id="btnJoinRoom" class="btn-setup-action join">CONECTARSE</button>
+        </div>
+      </div>
+
+      <div id="lobbyStatus" class="lobby-status hidden">
+        <div class="player-slot" id="slotP1">Jugador 1: <span class="status-badge waiting">Esperando...</span></div>
+        <div class="player-slot" id="slotP2">Jugador 2: <span class="status-badge waiting">Esperando...</span></div>
+      </div>
+
+      <button id="btnBackToPvpMenu" class="btn-back-main">VOLVER</button>
+    </div>
+  </div>
+
+  <div id="pvpArena" class="pvp-arena hidden">
+    
+    <div id="laneP1" class="arena-lane p1-lane">
+      <div class="hud-player">
+        <span class="player-tag">JUGADOR 1</span>
+        <span class="player-score" id="scoreP1">0</span>
+      </div>
+      <div class="game-space">
+        <div class="circle p1-circle" id="circleP1"></div>
+      </div>
+      <div class="lane-overlay" id="overlayP1">
+        <p class="overlay-msg">TOCA DOS VECES PARA EL LISTO</p>
+      </div>
+    </div>
+
+    <div class="arena-core">
+      <div class="core-timer-box">
+        <small class="core-label" id="timerLabel">TIEMPO</small>
+        <div id="pvpTimer" class="core-timer">30.00</div>
+      </div>
+      
+      <div id="footballScoreboard" class="football-scoreboard hidden">
+        <div class="board-side">
+          <span class="board-team">LCL</span>
+          <span id="goalsP1" class="board-score">0</span>
+        </div>
+        <div class="board-divider">:</div>
+        <div class="board-side">
+          <span id="goalsP2" class="board-score">0</span>
+          <span class="board-team">VST</span>
+        </div>
+      </div>
+      
+      <button id="btnReadyOnline" class="btn-ready-online hidden">¡ESTOY LISTO! (0/2)</button>
+    </div>
+
+    <div id="laneP2" class="arena-lane p2-lane">
+      <div class="hud-player">
+        <span class="player-tag" id="tagP2">JUGADOR 2</span>
+        <span class="player-score" id="scoreP2">0</span>
+      </div>
+      <div class="game-space">
+        <div class="circle p2-circle" id="circleP2"></div>
+      </div>
+      <div class="lane-overlay" id="overlayP2">
+        <p class="overlay-msg" id="msgP2">TOCA DOS VECES PARA EL LISTO</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="pvpGameOver" class="pvp-gameover-overlay hidden">
+    <div class="gameover-card">
+      <h2 class="winner-title" id="pvpWinnerDeclaration">¡JUGADOR 1 GANÓ!</h2>
+      
+      <div class="results-summary">
+        <div class="res-box p1-lane-res">
+          <h4>JUGADOR 1</h4>
+          <p id="finalScoreP1">0 Clics</p>
+          <p id="finalGoalsP1" class="final-goals hidden">0 Goles</p>
+        </div>
+        <div class="res-box vs-box">VS</div>
+        <div class="res-box p2-lane-res">
+          <h4 id="finalLabelP2">JUGADOR 2</h4>
+          <p id="finalScoreP2">0 Clics</p>
+          <p id="finalGoalsP2" class="final-goals hidden">0 Goles</p>
+        </div>
+      </div>
+
+      <p class="reset-hint">Toca dos veces en cualquier lado para revancha</p>
+      <button id="btnExitPvp" class="btn-back-main">SALIR AL MENÚ</button>
+    </div>
+  </div>
+
+</body>
+</html>

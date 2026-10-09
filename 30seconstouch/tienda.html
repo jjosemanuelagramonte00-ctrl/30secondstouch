@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tienda - 30SecondsTouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght=500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/tienda.css" />
+<script src="js/pantalla-completa.js"></script>
+<script src="js/proteccion.js"></script>
+</head>
+
+<body class="guest">
+
+<header class="nav">
+    <div class="logo">
+        <span class="logo-30">30</span>
+        <div class="logo-text">
+            <div class="logo-seconds">SECONDS</div>
+            <div class="logo-touch">TOUCH</div>
+        </div>
+    </div>
+
+    <nav class="nav-links" id="mainNavLinks">
+        <a href="index.html">INICIO</a>
+        <a href="pocisiones.html">RANKING</a>
+        <a href="estadisticas.html">ESTADÍSTICAS</a>
+        <a href="logros.html">LOGROS</a>
+        <a href="noticias.html">NOTICIAS</a>
+        <a href="tienda.html" class="active">TIENDA</a>
+    </nav>
+     
+    <div id="guestButtons">
+        <button class="btn-outline" id="loginBtn">INICIAR SESIÓN</button>
+        <button class="btn-primary" id="registerBtn">REGISTRARSE</button>
+    </div>
+
+    <div id="userPanel" class="user-dropdown-container" style="display:none;">
+        
+        <div class="dropdown-trigger" id="dropdownTrigger">
+            <img id="userPhoto" src="" alt="Perfil">
+            <div class="nav-coin-balance">
+                <span class="nav-coin-icon">🪙</span>
+                <span id="navUserCoins">0</span>
+            </div>
+        </div>
+
+        <div class="dropdown-menu" id="dropdownMenu">
+            <span id="userName" class="dropdown-username"></span>
+            
+            <nav class="mobile-nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="perfil.html">MI PERFIL</a>
+                <a href="pocisiones.html">RANKING</a>
+                <a href="estadisticas.html">ESTADÍSTICAS</a>
+                <a href="logros.html">LOGROS</a>
+                <a href="noticias.html">NOTICIAS</a>
+                <a href="tienda.html">TIENDA</a>
+            </nav>
+
+            <button class="btn-primary" id="logoutBtn">CERRAR SESIÓN</button> 
+        </div>
+
+    </div>
+</header>
+
+<main class="store-container">
+    <div class="grid-bg"></div>
+
+    <header class="store-header">
+        <div>
+            <h1>BAZAR ARCADE</h1>
+            <p class="store-subtitle">MEJORA TU ESTILO, ELIMINA LÍMITES Y DOMINA EL TABLERO</p>
+        </div>
+        <div class="coin-balance">
+            <span class="coin-icon">🪙</span>
+            <div class="balance-text">
+                <small>TUS MONEDAS</small>
+                <strong id="userCoins">0</strong>
+            </div>
+        </div>
+    </header>
+
+    <section class="store-section premium-section">
+        <h2 class="section-title">⚡ PASES EXCLUSIVOS</h2>
+        <div class="premium-card">
+            <div class="premium-badge">RECOMENDADO</div>
+            <div class="premium-content">
+                <div class="premium-info">
+                    <h3>30SECONDS PREMIUM</h3>
+                    <p>Desbloquea el máximo potencial competitivos sin interrupciones.</p>
+                    <ul class="premium-benefits">
+                        <li>🚫 Sin anuncios / propagandas molestas.</li>
+                        <li>🔋 Intentos infinitos diarios (Juega todo lo que quieras).</li>
+                        <li>🛡️ Insignia dorada exclusiva en el Ranking Global.</li>
+                        <li>💰 Multiplicador de monedas x2 por cada partida completada.</li>
+                    </ul>
+                </div>
+                <div class="premium-buy-box">
+                    <button class="btn-buy-real">💳 COMPRAR (USD $2.99)</button>
+                    <div class="divider-text">O BIEN</div>
+                    <button class="btn-buy-coins btn-shop-action" data-id="premium_pass" data-price="50000" data-type="premium">🪙 50,000 PTS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="store-grid">
+    
+    <section class="store-section">
+        <h2 class="section-title">🔴 SKINS DE CÍRCULO</h2>
+        <div class="items-list">
+            <div class="shop-item">
+                <div class="item-preview theme-cyan"></div>
+                <div class="item-details">
+                    <h4>TEMA CYBER CIAN</h4>
+                    <p>Cambia todos los acentos naranjas por un cian brillante.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="neon_cyan" data-price="1500" data-type="theme">🪙 1,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-preview theme-pink"></div>
+                <div class="item-details">
+                    <h4>TOQUE TOKYO PINK</h4>
+                    <p>Estilo retro synthwave con tonalidades rosas intensas.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="neon_pink" data-price="2000" data-type="theme">🪙 2,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-preview theme-matrix"></div>
+                <div class="item-details">
+                    <h4>MATRIX CODE (VERDE)</h4>
+                    <p>Estilo terminal de hacker clásico de los 90s.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="neon_matrix" data-price="3500" data-type="theme">🪙 3,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">☀️</div>
+                <div class="item-details">
+                    <h4>NÚCLEO SOLAR</h4>
+                    <p>El círculo se convierte en un sol radiante que pulsa en pantalla.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="skin_sun" data-price="5000" data-type="theme">🪙 5,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">💎</div>
+                <div class="item-details">
+                    <h4>CRISTAL DIAMANTE</h4>
+                    <p>Transforma el objetivo en un diamante facetado brillante.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="skin_diamond" data-price="7500" data-type="theme">🪙 7,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🌀</div>
+                <div class="item-details">
+                    <h4>VÓRTICE COSMICO</h4>
+                    <p>Un agujero negro animado que gira lentamente como objetivo.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="skin_vortex" data-price="10000" data-type="theme">🪙 10,000</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store-section">
+        <h2 class="section-title">👾 MASCOTAS HOLO</h2>
+        <div class="items-list">
+            <div class="shop-item">
+                <div class="item-avatar">🐱‍👤</div>
+                <div class="item-details">
+                    <h4>NEKO-BOT CLIC</h4>
+                    <p>Un gatito holográfico que maúlla rápido cuando la racha es alta.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="pet_neko" data-price="8000" data-type="pet">🪙 8,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🛸</div>
+                <div class="item-details">
+                    <h4>MINI OVNI COMPAÑERO</h4>
+                    <p>Vuela alrededor del círculo naranja absorbiendo clics fallidos.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="pet_ufo" data-price="12500" data-type="pet">🪙 12,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🔥</div>
+                <div class="item-details">
+                    <h4>ESPÍRITU PHOENIX</h4>
+                    <p>Deja una estela de fuego cada vez que tocas la pantalla.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="pet_phoenix" data-price="20000" data-type="pet">🪙 20,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🐉</div>
+                <div class="item-details">
+                    <h4>DRAGÓN DE MEGABITS</h4>
+                    <p>Un dragón pixelado que ruge al superar tu récord personal.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="pet_dragon" data-price="35000" data-type="pet">🪙 35,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🦊</div>
+                <div class="item-details">
+                    <h4>ZORRO CIBERNÉTICO</h4>
+                    <p>Corre por los bordes de la pantalla animando tus combos.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="pet_fox" data-price="15000" data-type="pet">🪙 15,000</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store-section">
+        <h2 class="section-title">📦 CAJAS SORPRESA</h2>
+        <div class="items-list">
+            <div class="shop-item">
+                <div class="item-avatar">📦</div>
+                <div class="item-details">
+                    <h4>CAJA BRONCE (COMÚN)</h4>
+                    <p>Contiene chances aleatorias, consumibles básicos o pérdidas.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="box_bronze" data-price="500" data-type="box">🪙 500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🎁</div>
+                <div class="item-details">
+                    <h4>CAJA PLATA (RARA)</h4>
+                    <p>Probabilidad media de obtener multiplicadores de monedas temporales.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="box_silver" data-price="2500" data-type="box">🪙 2,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🧰</div>
+                <div class="item-details">
+                    <h4>CONTRABANDO COMPLETO</h4>
+                    <p>Desbloquea instantáneamente 3 consumibles sorpresa de alto valor.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="box_contraband" data-price="4500" data-type="box">🪙 4,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">👑</div>
+                <div class="item-details">
+                    <h4>HUEVO MÍSTICO GLITCH</h4>
+                    <p>¿Qué romperá el cascarón? Puede dar una mascota exclusiva no listada.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="box_mystic" data-price="15000" data-type="box">🪙 15,000</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store-section">
+        <h2 class="section-title">✨ EFECTOS DE CLIC</h2>
+        <div class="items-list">
+            <div class="shop-item">
+                <div class="item-avatar">💥</div>
+                <div class="item-details">
+                    <h4>MICRO EXPLOSIÓN</h4>
+                    <p>Cada clic genera una onda expansiva de partículas pixeladas.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="fx_explosion" data-price="3000" data-type="fx">🪙 3,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">⚡</div>
+                <div class="item-details">
+                    <h4>RAYO DE VOLTAJE</h4>
+                    <p>Pequeños relámpagos conectan el cursor con los bordes del panel.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="fx_lightning" data-price="6000" data-type="fx">🪙 6,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">✨</div>
+                <div class="item-details">
+                    <h4>POLVO DE ESTRELLAS</h4>
+                    <p>Deja un rastro brillante de purpurina arcade flotando en el aire.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="fx_stars" data-price="4500" data-type="fx">🪙 4,500</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">💵</div>
+                <div class="item-details">
+                    <h4>LLUVIA DE BILLETES</h4>
+                    <p>Efecto visual que simula fajos cayendo al romper rachas.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="fx_money" data-price="12000" data-type="fx">🪙 12,000</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store-section">
+        <h2 class="section-title">⚡ CONSUMIBLES</h2>
+        <div class="items-list">
+            <div class="shop-item">
+                <div class="item-avatar">🔋</div>
+                <div class="item-details">
+                    <h4>RECARGA DE CHANCES (+5)</h4>
+                    <p>¿Te quedaste sin intentos diarios? Suma 5 partidas al instante.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="consumable_chances" data-price="400" data-type="consumable">🪙 400</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🧪</div>
+                <div class="item-details">
+                    <h4>POCIÓN DE FÓSFORO</h4>
+                    <p>Vuelve el círculo un 10% más grande por 1 partida.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="consumable_size" data-price="1000" data-type="consumable">🪙 1,000</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">⏱️</div>
+                <div class="item-details">
+                    <h4>CONGELADOR TEMPORAL</h4>
+                    <p>Añade +2 segundos extras al reloj en tu siguiente intento.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="consumable_freeze" data-price="1800" data-type="consumable">🪙 1,800</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="item-avatar">🛡️</div>
+                <div class="item-details">
+                    <h4>ESCUDO DE COMBO</h4>
+                    <p>Tu primer clic fallado en la partida no romperá tu racha de precisión.</p>
+                    <button class="btn-purchase btn-shop-action" data-id="consumable_shield" data-price="1200" data-type="consumable">🪙 1,200</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</main>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/tienda.js"></script>
+</body>
+</html>

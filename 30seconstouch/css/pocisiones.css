@@ -1,0 +1,142 @@
+/* --- CONFIGURACIÓN DEL LAYOUT --- */
+.ranking-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px;
+    min-height: calc(100vh - 120px);
+    background-color: #050200;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/* Reutilizamos tu fondo de cuadrícula */
+.grid-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(to right, rgba(255, 140, 0, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 140, 0, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+}
+
+/* --- CONTENEDOR ESTILO ARCADE --- */
+.panel-arcade {
+    background: rgba(12, 5, 0, 0.85);
+    border: 2px solid #ff8c00;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.15), inset 0 0 15px rgba(255, 140, 0, 0.05);
+    border-radius: 8px;
+    padding: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Variación de color neón para los Grupos */
+.panel-arcade.groups-accent {
+    border-color: #00ccff;
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.15), inset 0 0 15px rgba(0, 204, 255, 0.05);
+}
+
+.panel-arcade-head {
+    margin-bottom: 25px;
+    border-bottom: 1px dashed rgba(255, 140, 0, 0.3);
+    padding-bottom: 15px;
+}
+.groups-accent .panel-arcade-head {
+    border-bottom-color: rgba(0, 204, 255, 0.3);
+}
+
+.panel-arcade-head h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+}
+.panel-arcade:not(.groups-accent) h2 { color: #fff; text-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
+.groups-accent h2 { color: #fff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5); }
+
+.subtitle-panel {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #d1b28d;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- ESTILOS DE LA TABLA COMPLETA --- */
+.table-container {
+    overflow-y: auto;
+    max-height: 65vh;
+    padding-right: 5px;
+}
+
+/* Personalizar barra de scroll estilo retro */
+.table-container::-webkit-scrollbar { width: 6px; }
+.table-container::-webkit-scrollbar-track { background: #0c0500; }
+.table-container::-webkit-scrollbar-thumb { background: #ff8c00; border-radius: 3px; }
+.groups-accent .table-container::-webkit-scrollbar-thumb { background: #00ccff; }
+
+.arcade-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+}
+
+.arcade-table th {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ff8c00;
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 2px solid #ff8c00;
+    letter-spacing: 1px;
+}
+.groups-accent .arcade-table th {
+    color: #00ccff;
+    border-bottom-color: #00ccff;
+}
+
+.arcade-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid rgba(209, 178, 141, 0.1);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Filas alternas */
+.arcade-table tbody tr:nth-child(even) {
+    background: rgba(255, 140, 0, 0.02);
+}
+.groups-accent .arcade-table tbody tr:nth-child(even) {
+    background: rgba(0, 204, 255, 0.02);
+}
+
+/* Columnas fijas */
+.col-pos { width: 12%; font-family: 'Press Start 2P', monospace; font-size: 12px; }
+.col-name { width: 63%; }
+.col-score { width: 25%; text-align: right; font-family: 'Press Start 2P', monospace; font-size: 13px; }
+
+/* Resaltar el podio (Top 3) */
+.arcade-table tbody tr:nth-child(1) .col-pos { color: #ffcc00; text-shadow: 0 0 8px #ffcc00; }
+.arcade-table tbody tr:nth-child(2) .col-pos { color: #cccccc; text-shadow: 0 0 8px #cccccc; }
+.arcade-table tbody tr:nth-child(3) .col-pos { color: #ff8c00; text-shadow: 0 0 8px #ff8c00; }
+
+.arcade-table tbody tr:nth-child(1) { background: rgba(255, 204, 0, 0.04); }
+
+.loading-text {
+    text-align: center;
+    color: #d1b28d;
+    font-style: italic;
+    padding: 40px 0 !important;
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+    .ranking-layout { grid-template-columns: 1fr; gap: 30px; padding: 20px; }
+}

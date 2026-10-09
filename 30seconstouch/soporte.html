@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>30 Seconds Touch - SOPORTE</title>
+  <link rel="stylesheet" href="css/soporte.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<script src="js/proteccion.js"></script>
+</head>
+<body class="terms-body"> <div class="terms-container">
+    <h1>CENTRO DE SOPORTE</h1>
+    
+    <p>¿Tienes problemas con un torneo, un bug o un error en tu cuenta? Estamos aquí para ayudarte.</p>
+
+    <div class="support-methods">
+      <h2>CANALES DE ATENCIÓN</h2>
+      <p><strong>Discord Oficial:</strong> <a href="#" style="color: #ff8c00;">Únete aquí para asistencia rápida</a></p>
+      <p><strong>Correo de Soporte:</strong> soporte@30secondstouch.com</p>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #4a2d08; margin: 30px 0;">
+
+    <h2>FORMULARIO DE INCIDENCIAS</h2>
+    <form id="supportForm">
+      <label>Tu nombre de usuario:</label>
+      <input type="text" id="userName" required>
+      
+      <label>Categoría:</label>
+      <select id="category">
+        <option>Reportar Bug</option>
+        <option>Problema con Torneo</option>
+        <option>Sugerencia</option>
+      </select>
+
+      <label>Descripción del problema:</label>
+      <textarea id="issueDesc" rows="4" required></textarea>
+      
+      <button type="submit" class="btn-submit">ENVIAR TICKET</button>
+    </form>
+
+    <button onclick="window.history.back()" class="btn-back-terms">VOLVER</button>
+  </div>
+</body>
+</html>

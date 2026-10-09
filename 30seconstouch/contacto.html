@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>30 Seconds Touch - CONTACTO</title>
+  <link rel="stylesheet" href="css/contacto.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<script src="js/proteccion.js"></script>
+</head>
+<body class="terms-body">
+
+  <div class="terms-container">
+    <h1>CONTACTO OFICIAL</h1>
+    
+    <div class="contact-grid">
+      <div class="info-section">
+        <h2>ESTADO DEL SERVIDOR</h2>
+        <div class="status-box">
+          <p>ESTADO: <span style="color: #39ff14;">ONLINE</span></p>
+          <p>VERSIÓN: 1.0.0</p>
+          <p>UBICACIÓN: NODO CENTRAL</p>
+        </div>
+        <p style="margin-top: 20px; font-size: 12px; color: #a67c52;">
+          Si eres un colaborador o prensa, usa nuestro contacto directo para respuestas priorizadas.
+        </p>
+      </div>
+
+      <div class="form-section">
+        <h2>ENVÍA UN MENSAJE</h2>
+        <form id="contactForm">
+          <label>EMAIL:</label>
+          <input type="email" placeholder="usuario@ejemplo.com" required>
+          
+          <label>ASUNTO:</label>
+          <select>
+            <option>Colaboraciones / Prensa</option>
+            <option>Sugerencias del Juego</option>
+            <option>Reporte de Errores</option>
+            <option>Otros</option>
+          </select>
+          
+          <label>MENSAJE:</label>
+          <textarea rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+          
+          <button type="submit" class="btn-submit">ENVIAR TRANSMISIÓN</button>
+        </form>
+      </div>
+    </div>
+
+    <button onclick="window.location.href='index.html'" class="btn-back-terms">VOLVER AL MENÚ</button>
+  </div>
+</body>
+</html>

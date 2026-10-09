@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>30SecondsTouch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+<script src="js/proteccion.js"></script>
+</head>
+
+<body class="guest">
+
+<header class="nav">
+    <div class="logo">
+        <span class="logo-30">30</span>
+        <div class="logo-text">
+            <div class="logo-seconds">SECONDS</div>
+            <div class="logo-touch">TOUCH</div>
+        </div>
+    </div>
+
+    <nav class="nav-links" id="mainNavLinks">
+        <a href="index.html" class="active">INICIO</a>
+        <a href="pocisiones.html">RANKING</a>
+        <a href="estadisticas.html">ESTADÍSTICAS</a>
+        <a href="logros.html">LOGROS</a>
+        <a href="noticias.html">NOTICIAS</a>
+        <a href="tienda.html">TIENDA</a>
+    </nav>
+     
+    <div id="guestButtons">
+        <button class="btn-outline" id="loginBtn">INICIAR SESIÓN</button>
+        <button class="btn-primary" id="registerBtn">REGISTRARSE</button>
+    </div>
+
+    <div id="userPanel" class="user-dropdown-container" style="display:none;">
+        
+        <div class="dropdown-trigger" id="dropdownTrigger">
+            <img id="userPhoto" src="" alt="Perfil">
+            <div class="nav-coin-balance">
+                <span class="nav-coin-icon">🪙</span>
+                <span id="navUserCoins">0</span>
+            </div>
+        </div>
+
+        <div class="dropdown-menu" id="dropdownMenu">
+            <span id="userName" class="dropdown-username"></span>
+            
+            <nav class="mobile-nav-links">
+                <a href="index.html">INICIO</a>
+                <a href="perfil.html">MI PERFIL</a>
+                <a href="pocisiones.html">RANKING</a>
+                <a href="estadisticas.html">ESTADÍSTICAS</a>
+                <a href="logros.html">LOGROS</a>
+                <a href="noticias.html">NOTICIAS</a>
+                <a href="tienda.html">TIENDA</a>
+            </nav>
+
+            <button class="btn-primary" id="logoutBtn">CERRAR SESIÓN</button> 
+        </div>
+
+    </div>
+</header>
+
+<main class="main-grid">
+    <section class="hero">
+        <p class="hero-eyebrow">30 SEGUNDOS PARA DEMOSTRAR</p>
+        <h1 class="hero-title">QUE TIENES<br>EL MEJOR</h1>
+        <h2 class="hero-title-orange">TOQUE</h2>
+        <p class="hero-desc">Toca el círculo la mayor cantidad de veces posible en solo 30 segundos y compite contra jugadores de todo el mundo.</p>
+        <button class="btn-play">▶ JUGAR AHORA</button>
+        <div class="hero-buttons">
+            <a href="pvp.html" class="btn-outline-small">⚔ MODO PVP</a>
+            <a href="desafio.html" class="btn-outline-small">◎ DESAFÍOS</a>
+        </div>
+        <div class="social">
+            <span>SÍGUENOS EN: @30SecondsTouch</span>
+            <div class="social-icons"></div>
+        </div>
+    </section>
+
+    <section class="game-panel">
+        <div class="grid-bg"></div>
+        <div class="game-content">
+            <p class="ready">¿LISTO?</p>
+            <p class="timer">30.00</p>
+            <div class="circle"></div>
+            <p class="touch-label">¡TOCA AQUÍ!</p>
+            
+            <div id="gameOverScreen">
+                <h2>FIN DE LA PARTIDA</h2>
+                <small>PUNTUACIÓN LOGRADA</small>
+                <div id="finalScore">0</div>
+                <button id="shareScoreBtn" class="btn-share-score">📤 COMPARTIR RESULTADO</button>
+                <small>Haz clic en cualquier parte para volver a jugar</small> 
+            </div>
+            
+            <div class="game-hud">
+                <div class="hud-logo">
+                    <span class="logo-30">30</span>
+                    <div class="logo-text">
+                        <div class="logo-seconds">SECONDS</div>
+                        <div class="logo-touch">TOUCH</div>
+                    </div>
+                </div>
+
+                <div class="hud-top">
+                    <button id="exitGameBtn"><span class="esc-box">ESC</span> SALIR DEL JUEGO</button>
+                </div>
+
+                <div class="hud-score">
+                    <span>PUNTUACIÓN</span>
+                    <strong id="scoreCounter">0</strong>
+                </div>
+
+                <div class="hud-left">
+                    <span>MEJOR PUNTUACIÓN</span>
+                    <strong id="bestScoreStatHud">0</strong>
+                </div>
+
+                <div class="hud-right">
+                    <span>CLICKS</span>
+                    <strong id="clickCounter">0</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="right-col">
+        <div class="panel">
+            <div class="panel-head">
+                <h3>TOP 10 MUNDIAL</h3>
+                <a href="pocisiones.html">VER TODO</a>
+            </div>
+            <ul class="ranking" id="rankingList">
+                <li><span class="name" style="color: var(--text-muted);">Cargando clasificación...</span></li>
+            </ul>
+        </div>
+
+        <div class="panel record">
+            <div class="trophy">🏆</div>
+            <div>
+                <p class="record-label">RÉCORD MUNDIAL</p>
+                <p class="record-score" id="worldRecordScore">0</p>
+                <p class="record-name" id="worldRecordName">Nadie aún</p>
+                <p class="record-date" id="worldRecordDate">--/--/----</p>
+            </div>
+        </div>
+    </aside>
+</main>
+
+<section class="row-two">
+    <div class="panel pvp-panel">
+        <p class="pvp-eyebrow">NUEVO: DESAFÍO DIARIO</p>
+        <h3 class="pvp-title">¡SUPERA EL RETO DE HOY!</h3>
+        <p class="pvp-desc">Un desafío distinto cada día. Completalo y sube de nivel en la escalera de 50 días.</p>
+        <a href="desafio.html" class="btn-primary">JUGAR DESAFÍO</a>
+        <a href="tienda.html" class="btn-outline-small" style="margin-top:10px; display:inline-block;">VISITAR EL BAZAR 🪙</a>
+    </div>
+
+    <div class="panel features">
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <p class="feature-title">RÁPIDO Y ADICTIVO</p>
+            <p class="feature-desc">Solo 30 segundos para demostrar tu velocidad y reflejos.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🏅</div>
+            <p class="feature-title">COMPITE GLOBALMENTE</p>
+            <p class="feature-desc">Sube en el ranking mundial y conviértete en el número 1.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <p class="feature-title">MEJORA TUS RÉCORDS</p>
+            <p class="feature-desc">Supera tu mejor marca una y otra vez.</p>
+        </div>
+    </div>
+</section>
+
+<section class="row-three">
+    <div class="panel">
+        <h4 class="panel-title">📈 TUS ESTADÍSTICAS</h4>
+        <div class="stats"></div>
+        <button class="btn-primary small"><a href="estadisticas.html">VER PERFIL</a></button>
+    </div>
+
+    <div class="panel">
+        <h4 class="panel-title">📰 ÚLTIMAS NOTICIAS</h4>
+        <ul class="list">
+            <li><span>bienvenidos a 30secondstouch</span><span class="date">terminado</span></li>
+            <li><span>esperando noticias</span><span class="date">proximamente</span></li>
+            <li><span>esperando noticias</span><span class="date">proximamente</span></li>
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h4 class="panel-title">📅 PRÓXIMOS EVENTOS</h4>
+        <ul class="list">
+            <li><span>📅 Nuevos ítems en el Bazar</span><span class="date">proximamente</span></li>
+            <li><span>📅 Modo PVP por equipos</span><span class="date">proximamente</span></li>
+            <li><span>📅 Nuevos desafíos diarios</span><span class="date">en curso</span></li>
+        </ul>
+    </div>
+</section>
+
+
+
+<footer class="footer">
+    <p>© 2026 30secondstouch || JOLECE STUDIOS Todos los derechos reservados.</p>
+    <div class="footer-links">
+        <a href="terminos.html">TÉRMINOS DE USO</a>
+        <a href="privacidad.html">PRIVACIDAD</a>
+        <a href="soporte.html">SOPORTE</a>
+        <a href="contacto.html">CONTACTO</a>
+    </div>
+</footer>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/game.js"></script>
+<script type="module" src="js/position.js"></script>
+
+
+
+
+</body>
+</html>

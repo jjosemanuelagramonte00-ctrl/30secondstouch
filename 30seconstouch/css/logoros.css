@@ -1,0 +1,155 @@
+/* --- LAYOUT DE LA PÁGINA --- */
+.achievements-container {
+    position: relative;
+    padding: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 85vh;
+}
+
+/* Cabecera */
+.achievements-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.achievements-header h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 26px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+    margin-bottom: 15px;
+}
+.achievements-header p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--text-muted, #d1b28d);
+    font-weight: 600;
+}
+
+/* Barra de progreso */
+.progress-bar-container {
+    width: 100%;
+    max-width: 500px;
+    height: 10px;
+    background: #1a0f07;
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    margin: 15px auto 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    background: #ff8c00;
+    box-shadow: 0 0 10px #ff8c00;
+    transition: width 0.5s ease;
+}
+
+/* --- REJILLA DE TARJETAS DE LOGROS --- */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+}
+
+/* TARJETA BASE DE LOGRO (Gris por defecto / Bloqueada) */
+.ach-card {
+    background: rgba(20, 20, 20, 0.6);
+    border: 2px solid #333333;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-sizing: border-box;
+}
+
+/* Cuando está Bloqueado (Gris total) */
+.ach-card.locked {
+    filter: grayscale(1) contrast(0.85);
+    opacity: 0.6;
+}
+.ach-card.locked .ach-icon-box {
+    background: #222;
+    border-color: #444;
+}
+
+/* El cuadro del Icono */
+.ach-icon-box {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 140, 0, 0.05);
+    border: 2px solid #ff8c00;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(255, 140, 0, 0.1);
+    flex-shrink: 0;
+}
+.ach-icon {
+    font-size: 28px;
+}
+
+/* Información del logro */
+.ach-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 20px;
+}
+.ach-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+.ach-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #bfa382;
+    margin: 0;
+    line-height: 1.3;
+}
+.ach-xp {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    color: #ff8c00;
+    margin-top: 4px;
+}
+
+/* Candados */
+.ach-status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+/* --- EFECTO CUANDO SE DESBLOQUEE (ILUMINADO) --- */
+.ach-card.unlocked {
+    filter: none;
+    opacity: 1;
+    background: rgba(12, 5, 0, 0.9);
+    border-color: #ff8c00;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.2), inset 0 0 10px rgba(255, 140, 0, 0.05);
+    animation: unlockGlow 0.5s ease-out;
+}
+.ach-card.unlocked .ach-title {
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+.ach-card.unlocked .ach-status-badge {
+    opacity: 1;
+}
+
+@keyframes unlockGlow {
+    0% { transform: scale(0.98); border-color: #fff; box-shadow: 0 0 25px #fff; }
+    100% { transform: scale(1); border-color: #ff8c00; box-shadow: 0 0 15px rgba(255, 140, 0, 0.2); }
+}

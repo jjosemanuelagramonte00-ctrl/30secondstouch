@@ -1,0 +1,360 @@
+:root {
+    --neon-orange: #ff5500;
+    --neon-blue: #00ffff;
+    --dark-bg: #0a0a12;
+    --card-bg: rgba(20, 20, 35, 0.75);
+    --border-color: #333355;
+    
+    /* Variables dinámicas para las skins (cambiarán por JS) */
+    --theme-accent: var(--neon-orange);
+    --theme-glow: rgba(255, 85, 0, 0.3);
+}
+
+/* Aplicación del color del tema dinámico */
+.section-title, #profileCardName {
+    color: var(--theme-accent) !important;
+    text-shadow: 0 0 10px var(--theme-glow);
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 100px auto 40px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Tarjeta de Información de Usuario */
+.profile-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    backdrop-filter: blur(8px);
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+}
+
+#profileCardPhoto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--theme-accent);
+    box-shadow: 0 0 15px var(--theme-glow);
+    object-fit: cover;
+}
+
+.premium-tag {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd700;
+    color: #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.profile-info-text h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.8rem;
+    margin: 0 0 8px 0;
+}
+
+.profile-email {
+    font-size: 1.2rem;
+    color: #8888aa;
+    margin: 0 0 20px 0;
+}
+
+.profile-stats-mini {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    background: rgba(0,0,0,0.3);
+    border-left: 4px solid var(--theme-accent);
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.stat-box small {
+    display: block;
+    font-size: 0.8rem;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+.stat-box strong {
+    font-size: 1.5rem;
+    font-family: 'VT323', monospace;
+    color: #fff;
+}
+
+/* Sección de Inventario */
+.inventory-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: var(--theme-accent);
+    color: #000;
+    font-weight: bold;
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 10px var(--theme-glow);
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    min-height: 200px;
+}
+
+/* Tarjetas de items del inventario */
+.inventory-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.inventory-item:hover {
+    transform: translateY(-3px);
+    border-color: #555588;
+}
+
+.item-header-inv {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.item-icon-inv {
+    font-size: 2rem;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
+
+.item-title-inv h4 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    margin: 0 0 4px 0;
+    color: #fff;
+}
+
+.item-type-tag {
+    font-size: 0.7rem;
+    color: var(--theme-accent);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.inventory-item p {
+    font-size: 0.95rem;
+    color: #aaa;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+/* Botón Equipar / Equipado */
+.btn-equip {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 2px solid var(--theme-accent);
+    color: var(--theme-accent);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-equip:hover {
+    background: var(--theme-accent);
+    color: #000;
+}
+
+.btn-equip.equipped {
+    background: #00ff66;
+    border-color: #00ff66;
+    color: #000;
+    cursor: default;
+}
+
+.no-items-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #666688;
+    font-size: 1.2rem;
+}
+/* ===================================================
+   ÍCONO DE EDICIÓN SOBRE LA FOTO DE PERFIL
+=================================================== */
+.edit-avatar-hint {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--theme-accent);
+    color: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: 2px solid var(--dark-bg);
+    box-shadow: 0 0 10px var(--theme-glow);
+    pointer-events: none;
+}
+
+/* ===================================================
+   MODAL DE CONFIGURACIÓN
+=================================================== */
+.settings-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 10, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.settings-modal.show {
+    display: flex;
+}
+
+.settings-modal-box {
+    background: var(--card-bg);
+    border: 2px solid var(--theme-accent);
+    border-radius: 14px;
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 0 40px var(--theme-glow);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.settings-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.settings-close:hover {
+    color: #fff;
+}
+
+.settings-title {
+    color: var(--theme-accent);
+    text-shadow: 0 0 10px var(--theme-glow);
+    font-size: 1.3rem;
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.settings-section {
+    margin-bottom: 18px;
+}
+
+.settings-label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #999;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.settings-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.settings-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+}
+
+.settings-row input:focus {
+    outline: none;
+    border-color: var(--theme-accent);
+}
+
+.settings-row .btn-primary,
+.settings-row .btn-outline-small {
+    white-space: nowrap;
+}
+
+#groupInfoBox {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+}
+
+.settings-feedback {
+    min-height: 18px;
+    font-size: 13px;
+    text-align: center;
+    margin: 6px 0 0;
+    font-weight: 600;
+}

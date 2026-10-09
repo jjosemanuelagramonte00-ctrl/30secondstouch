@@ -1,0 +1,1150 @@
+:root {
+  --orange: #ff6a1f;
+  --orange-soft: #ff8a3d;
+  --bg: #0d0805;
+  --panel: #15100c;
+  --panel-border: rgba(255, 106, 31, 0.25);
+  --text: #f5ede6;
+  --text-dim: #b8a89c;
+  --text-muted: #8a7a6e;
+  --pixel: 'Press Start 2P', monospace;
+  --digital: 'VT323', monospace;
+  --ui: 'Rajdhani', sans-serif;
+}
+
+/* ===================================================
+   RESET Y ESTILOS GENERALES Y BLOQUEO DE SCROLL MÓVIL
+   =================================================== */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: var(--bg);
+  overscroll-behavior-y: contain; 
+}
+
+body {
+  color: var(--text);
+  font-family: var(--ui);
+  min-height: 100vh;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body.playing { 
+  overflow: hidden; 
+}
+
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
+
+button { 
+  cursor: pointer; 
+  border: none; 
+  font-family: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Optimizador global de toques y eliminación del recuadro azul molesto al dar clics */
+.game-panel, #gameArea, .circle, button, .dropdown-trigger, .touch-label {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===================================================
+   NAVEGACIÓN (HEADER)
+=================================================== */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(255, 106, 31, 0.12);
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.logo { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.logo-30 { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 28px; 
+}
+
+.logo-text { 
+  line-height: 1.2; 
+}
+
+.logo-seconds { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 13px; 
+  letter-spacing: 2px; 
+}
+
+.logo-touch { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 11px; 
+  letter-spacing: 3px; 
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 32px; 
+  font-weight: 600; 
+  font-size: 13px; 
+  letter-spacing: 2px; 
+}
+
+.nav-links a { 
+  color: #cdbfb4; 
+  position: relative; 
+  padding: 4px 0; 
+  transition: color .2s; 
+}
+
+.nav-links a:hover { 
+  color: #fff; 
+}
+
+.nav-links a.active { 
+  color: var(--orange); 
+}
+
+.nav-links a.active::after {
+  content: ''; 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  bottom: -4px;
+  height: 2px; 
+  background: var(--orange);
+}
+
+.nav-actions { 
+  display: flex; 
+  gap: 12px; 
+}
+
+/* ===================================================
+   COMPONENTES UI (BOTONES Y PANELES)
+=================================================== */
+.btn-ghost {
+  background: transparent; 
+  color: var(--text);
+  padding: 8px 12px; 
+  border-radius: 6px;
+  border: 1px solid #3a2e26; 
+  font-size: 13px;
+}
+
+.btn-outline {
+  background: transparent; 
+  color: var(--text);
+  padding: 8px 16px; 
+  border-radius: 6px;
+  border: 1px solid var(--text); 
+  font-weight: 700; 
+  font-size: 13px; 
+  letter-spacing: 2px;
+}
+
+.btn-primary {
+  background: var(--orange); 
+  color: #fff;
+  padding: 8px 16px; 
+  border-radius: 6px;
+  font-weight: 700; 
+  font-size: 13px; 
+  letter-spacing: 2px;
+}
+
+.btn-primary.small { 
+  padding: 8px 14px; 
+  font-size: 12px; 
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.panel-head { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 16px; 
+}
+
+.panel-head h3 { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 12px; 
+  letter-spacing: 2px; 
+}
+
+.panel-head a { 
+  color: var(--orange); 
+  font-size: 12px; 
+  font-weight: 700; 
+  letter-spacing: 2px; 
+}
+
+/* INTERFAZ DE USUARIO / MONEDAS */
+#guestButtons { 
+  display: flex; 
+  gap: 12px; 
+}
+
+#userPanel { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+#userPhoto {
+  width: 42px; 
+  height: 42px; 
+  border-radius: 50%; 
+  object-fit: cover;
+  border: 2px solid var(--orange);
+  box-shadow: 0 0 10px rgba(255,106,31,.4);
+}
+
+#userName { 
+  color: white; 
+  font-weight: 700; 
+  font-size: 15px; 
+  white-space: nowrap; 
+}
+
+.nav-coin-balance {
+  background: #0f0802;
+  border: 1px solid #ff8c00;
+  border-radius: 4px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.15);
+}
+
+.nav-coin-icon {
+  font-size: 16px;
+  animation: navCoinFloat 3s ease-in-out infinite; 
+}
+
+#navUserCoins {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+/* ===================================================
+   SECCIÓN: FILA PRINCIPAL (GRID)
+=================================================== */
+.main-grid {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 24px;
+}
+
+/* HERO IZQUIERDO */
+.hero {
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.hero-eyebrow { 
+  color: var(--orange); 
+  font-size: 14px; 
+  font-weight: 700; 
+  letter-spacing: 3px; 
+  margin-bottom: 16px; 
+}
+
+.hero-title { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 32px; 
+  line-height: 1.3; 
+  margin-bottom: 8px; 
+}
+
+.hero-title-orange { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 56px; 
+  line-height: 1; 
+  margin-bottom: 24px; 
+}
+
+.hero-desc { 
+  color: var(--text-dim); 
+  font-size: 15px; 
+  line-height: 1.6; 
+  margin-bottom: 28px; 
+  max-width: 360px; 
+}
+
+.btn-play {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px;
+  width: 100%; 
+  max-width: 360px;
+  padding: 16px 24px;
+  background: linear-gradient(180deg, var(--orange-soft), var(--orange));
+  color: #fff; 
+  font-weight: 700; 
+  font-size: 16px; 
+  letter-spacing: 2px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px -8px var(--orange);
+}
+
+.hero-buttons { 
+  display: flex; 
+  gap: 12px; 
+  margin-top: 16px; 
+  max-width: 360px; 
+}
+
+.btn-outline-small {
+  flex: 1;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px;
+  padding: 12px 16px; 
+  border-radius: 6px;
+  background: transparent; 
+  color: var(--text);
+  border: 1px solid #3a2e26;
+  font-weight: 700; 
+  font-size: 13px; 
+  letter-spacing: 2px;
+}
+
+.social { 
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+  margin-top: 32px; 
+}
+
+.social > span { 
+  color: var(--text-muted); 
+  font-size: 12px; 
+  letter-spacing: 2px; 
+}
+
+.social-icons { 
+  display: flex; 
+  gap: 12px; 
+  color: var(--orange); 
+  font-size: 20px; 
+}
+
+/* CONTENEDOR CENTRAL DEL JUEGO */
+.game-panel {
+  position: relative;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 24px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, rgba(255, 106, 31, 0.08), transparent 70%), var(--panel);
+  min-height: 540px;
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.grid-bg {
+  position: absolute; 
+  inset: 0; 
+  opacity: .08; 
+  pointer-events: none;
+  background-size: 24px 24px;
+  background-image: linear-gradient(rgba(255, 106, 31, .5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 106, 31, .5) 1px, transparent 1px);
+}
+
+.game-content {
+  position: relative; 
+  height: 100%;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  min-height: 500px;
+}
+
+.ready { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 14px; 
+  margin-bottom: 12px; 
+}
+
+.timer { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 48px; 
+  margin-bottom: 40px; 
+}
+
+.circle {
+  width: 220px; 
+  height: 220px; 
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--orange-soft), var(--orange) 60%, #c64a10);
+  box-shadow: 0 0 80px var(--orange), inset 0 -20px 40px rgba(0,0,0,0.3);
+  cursor: pointer;
+  animation: pulsacion 1.5s ease-in-out infinite;
+}
+
+.circle.size-boost {
+  transform: scale(1.1);
+}
+
+.touch-label { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 12px; 
+  margin-top: 48px; 
+  letter-spacing: 2px; 
+  cursor: pointer; 
+}
+
+/* ===================================================
+   🛡️ CONTROL DE VISIBILIDAD DEL HUD 
+   =================================================== */
+/* Por defecto, TODO el HUD de partida está totalmente oculto en el menú principal */
+.game-hud, 
+.hud-logo, 
+.hud-top, 
+.hud-score, 
+.hud-left, 
+.hud-right { 
+  display: none !important; 
+}
+
+/* COLUMNA DERECHA (RANKING & RECORD) */
+.right-col { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 24px; 
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.ranking { 
+  list-style: none; 
+}
+
+.ranking li {
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.ranking .pos { 
+  font-family: var(--digital); 
+  color: var(--text-muted); 
+  font-size: 20px; 
+  width: 24px; 
+}
+
+.ranking .flag { 
+  font-size: 18px; 
+}
+
+.ranking .name { 
+  flex: 1; 
+  font-size: 14px; 
+}
+
+.ranking .score { 
+  font-family: var(--digital); 
+  color: var(--orange); 
+  font-size: 20px; 
+  font-weight: 700; 
+}
+
+.record { 
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+}
+
+.trophy { 
+  font-size: 56px; 
+}
+
+.record-label { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 10px; 
+  letter-spacing: 2px; 
+  margin-bottom: 4px; 
+}
+
+.record-score { 
+  font-family: var(--digital); 
+  color: #fff; 
+  font-size: 36px; 
+  line-height: 1; 
+}
+
+.record-name { 
+  font-size: 14px; 
+  margin-top: 4px; 
+}
+
+.record-name span { 
+  color: var(--text-muted); 
+}
+
+.record-date { 
+  color: var(--text-muted); 
+  font-size: 12px; 
+}
+
+/* ===================================================
+   SECCIÓN: FILA DOS Y TRES (CONTENIDOS SECUNDARIOS)
+=================================================== */
+.row-two {
+  padding: 0 32px;
+  display: grid; 
+  grid-template-columns: 1fr 1.6fr; 
+  gap: 24px;
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.pvp-panel { 
+  border-color: var(--orange); 
+}
+
+.pvp-eyebrow { 
+  color: var(--orange); 
+  font-size: 13px; 
+  font-weight: 700; 
+  letter-spacing: 2px; 
+  margin-bottom: 8px; 
+}
+
+.pvp-title { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 16px; 
+  margin-bottom: 12px; 
+}
+
+.pvp-desc { 
+  color: var(--text-dim); 
+  font-size: 14px; 
+  margin-bottom: 16px; 
+  max-width: 320px; 
+}
+
+.features { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 24px; 
+  padding: 24px; 
+}
+
+.feature-icon {
+  width: 56px; 
+  height: 56px; 
+  border-radius: 50%;
+  background: rgba(255, 106, 31, 0.12);
+  border: 1px solid var(--orange);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 26px; 
+  margin-bottom: 12px;
+}
+
+.feature-title { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 10px; 
+  letter-spacing: 2px; 
+  margin-bottom: 8px; 
+}
+
+.feature-desc { 
+  color: var(--text-dim); 
+  font-size: 14px; 
+  line-height: 1.6; 
+}
+
+.row-three {
+  padding: 24px 32px;
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 24px;
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.panel-title { 
+  font-family: var(--pixel); 
+  color: #fff; 
+  font-size: 12px; 
+  letter-spacing: 2px; 
+  margin-bottom: 16px; 
+}
+
+.stats { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 12px; 
+  margin-bottom: 16px; 
+}
+
+.stat-label { 
+  color: var(--text-muted); 
+  font-size: 10px; 
+  letter-spacing: 1.5px; 
+  margin-bottom: 4px; 
+}
+
+.stat-value { 
+  font-family: var(--digital); 
+  color: var(--orange); 
+  font-size: 28px; 
+  line-height: 1; 
+}
+
+.list { 
+  list-style: none; 
+}
+
+.list li {
+  display: flex; 
+  justify-content: space-between; 
+  gap: 16px;
+  font-size: 14px; 
+  padding-bottom: 8px; 
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.list .date { 
+  color: var(--orange); 
+  font-size: 12px; 
+  letter-spacing: 2px; 
+  white-space: nowrap; 
+}
+
+/* ===================================================
+   FOOTER
+=================================================== */
+.footer {
+  padding: 24px 32px;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--text-muted); 
+  font-size: 12px;
+  transition: all .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.footer-links { 
+  display: flex; 
+  gap: 24px; 
+  letter-spacing: 2px; 
+}
+
+/* ESTADOS PRIVADOS (GUEST VS LOGGED) */
+.guest .private-content { display: none; }
+.logged .private-content { display: block; }
+
+/* ===================================================
+   🎮 MODO JUEGO ACTIVO (PANTALLA COMPLETA PC)
+=================================================== */
+.playing .hero { opacity: 0; pointer-events: none; }
+.playing .right-col { opacity: 0; pointer-events: none; }
+.playing .nav { opacity: 0; pointer-events: none; }
+.playing .row-two, .playing .row-three, .playing .footer { opacity: 0; pointer-events: none; }
+
+.playing .game-panel {
+  position: fixed; 
+  inset: 0; 
+  width: 100vw; 
+  height: 100vh;
+  max-width: none; 
+  border-radius: 0; 
+  margin: 0; 
+  padding: 0;
+  background: var(--bg); 
+  z-index: 99999 !important; 
+}
+
+.playing .game-content { 
+  height: 100vh; 
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  position: relative;
+}
+
+.playing .circle { 
+  width: 300px; 
+  height: 300px; 
+}
+
+.playing .timer { 
+  font-size: 90px; 
+  margin-bottom: 20px; 
+  margin-top: 10px; 
+  z-index: 10;
+}
+
+.playing .ready { 
+  font-family: var(--ui); 
+  color: #b8a89c; 
+  font-size: 14px; 
+  letter-spacing: 3px; 
+  font-weight: 700; 
+  margin-bottom: 5px; 
+  text-transform: uppercase; 
+}
+
+/* 🎯 EL HUD COMPLETO APARECE ÚNICAMENTE EN PARTIDA */
+.playing .game-hud { display: block !important; }
+.playing .hud-logo { display: flex !important; position: absolute; top: 30px; left: 40px; align-items: center; gap: 12px; }
+.playing .hud-top { display: block !important; position: absolute; top: 30px; right: 40px; left: auto; transform: none; z-index: 10050; }
+.playing .hud-score { display: block !important; position: absolute; top: 90px; right: 40px; text-align: right; }
+.playing .hud-left { display: block !important; position: absolute; bottom: 40px; left: 40px; text-align: left; }
+.playing .hud-right { display: block !important; position: absolute; bottom: 40px; right: 40px; text-align: right; }
+
+.hud-top button {
+  background: #1e150f; 
+  color: #b8a89c; 
+  border: 1px solid rgba(255, 106, 31, 0.4);
+  padding: 8px 16px; 
+  border-radius: 6px; 
+  font-family: var(--ui); 
+  font-size: 12px;
+  font-weight: 600; 
+  letter-spacing: 2px; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+}
+
+.hud-top button:hover { 
+  border-color: var(--orange); 
+  color: #fff; 
+  background: rgba(255, 106, 31, 0.1); 
+}
+
+.hud-top button .esc-box { 
+  border: 1px solid rgba(255, 106, 31, 0.5); 
+  padding: 2px 6px; 
+  border-radius: 4px; 
+  font-size: 11px; 
+  color: var(--orange); 
+}
+
+.hud-score span { 
+  display: block; 
+  color: var(--orange); 
+  font-size: 12px; 
+  letter-spacing: 2px; 
+  font-weight: 600; 
+}
+
+.hud-score strong { 
+  font-family: var(--pixel); 
+  font-size: 32px; 
+  color: #fff; 
+  display: block; 
+  margin-top: 5px; 
+}
+
+.hud-left, .hud-right { 
+  background: transparent; 
+  border: 1px solid rgba(255, 106, 31, 0.15); 
+  padding: 12px 20px; 
+  border-radius: 8px; 
+  min-width: 180px; 
+}
+
+.hud-left span, .hud-right span { 
+  display: block; 
+  color: var(--orange); 
+  font-size: 11px; 
+  letter-spacing: 1.5px; 
+  font-weight: 600; 
+  margin-bottom: 6px; 
+}
+
+.hud-left strong, .hud-right strong { 
+  font-family: var(--pixel); 
+  font-size: 18px; 
+  color: #fff; 
+}
+
+/* SCREEN GAME OVER IN-GAME */
+#gameOverScreen {
+  display: none; 
+  position: absolute; 
+  inset: 0; 
+  background: rgba(0,0,0,.94);
+  z-index: 99999; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column; 
+  gap: 20px; 
+  text-align: center;
+}
+
+#gameOverScreen.show { 
+  display: flex; 
+}
+
+#gameOverScreen h2 { 
+  font-family: var(--pixel); 
+  color: white; 
+  font-size: 24px; 
+}
+
+#finalScore { 
+  font-family: var(--pixel); 
+  color: var(--orange); 
+  font-size: 48px; 
+  line-height: 1.4; 
+}
+
+#gameOverScreen small { 
+  color: #8a7a6e; 
+  letter-spacing: 2px; 
+  font-size: 12px; 
+}
+
+.btn-share-score {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #fff;
+  background: linear-gradient(180deg, #2a2018, #171009);
+  border: 2px solid var(--orange);
+  border-radius: 8px;
+  padding: 12px 26px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(255, 106, 31, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-share-score:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(255, 106, 31, 0.55);
+}
+
+.btn-share-score:active {
+  transform: translateY(0);
+}
+
+.btn-share-score:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+/* DROPDOWN DEL HEADER */
+.user-dropdown-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+    background: rgba(255, 106, 31, 0.05);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: #0d0805; 
+    border: 2px solid #23160e;
+    border-top: 3px solid #ff6a1f; 
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.dropdown-username {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #23160e;
+    padding-bottom: 8px;
+    display: block;
+}
+
+.mobile-nav-links {
+    display: none; 
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-nav-links a {
+    color: #a29182;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.mobile-nav-links a:hover {
+    color: #fff;
+    background: rgba(255, 106, 31, 0.1);
+}
+
+/* ===================================================
+   ANIMACIONES COMENTADAS EN EL CORE
+=================================================== */
+@keyframes navCoinFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes pulsacion {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 140, 0, 0.4); }
+  50% { transform: scale(1.06); box-shadow: 0 0 20px rgba(255, 140, 0, 0.7); }
+}
+
+/* ===================================================
+   📱 CONSULTAS DE MEDIOS RESPONSIVAS (MÓVILES GLOBALES)
+=================================================== */
+@media (max-width: 1100px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 32px;
+  }
+  
+  .row-two, .row-three {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    gap: 24px;
+  }
+  
+  .row-three {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .features { 
+    grid-template-columns: 1fr; 
+    padding: 16px;
+  }
+  
+  .nav-links { 
+    display: none; 
+  }
+  
+  .nav {
+    padding: 16px;
+  }
+
+  .hero-title-orange {
+    font-size: 42px;
+  }
+
+  .hero-desc {
+    max-width: none;
+  }
+}
+
+/* ===================================================
+   📱 MEDIA QUERY CELULARES (MENÚ PRINCIPAL MÓVIL)
+   =================================================== */
+@media (max-width: 768px) {
+    #mainNavLinks {
+        display: none !important;
+    }
+    
+    .mobile-nav-links {
+        display: flex;
+    }
+
+    .nav {
+        padding: 10px 12px;
+    }
+
+    #guestButtons {
+        flex-direction: row; 
+        gap: 0;
+        align-items: center;
+    }
+
+    #guestButtons .btn-primary {
+        display: none !important;
+    }
+
+    #guestButtons .btn-outline {
+        padding: 6px 12px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        border-radius: 4px;
+        border-color: var(--orange);
+        color: #fff;
+    }
+
+    #userPanel .btn-primary, 
+    #userPanel button {
+        padding: 6px 10px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+    
+    #userName {
+        font-size: 13px;
+    }
+}
+
+/* ===================================================
+   📱 🎯 REESTRUCTURACIÓN DEL HUD EN CELULARES EN PARTIDA
+   =================================================== */
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 24px 16px;
+  }
+  
+  .footer-links {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  /* Ajustes del círculo y cronómetro en pantallas chicas */
+  .playing .circle {
+    width: 240px;
+    height: 240px;
+  }
+
+  .playing .timer {
+    font-size: 64px;
+    margin-bottom: 20px;
+  }
+
+  /* Ocultamos el logo secundario duplicado para ganar espacio */
+  .playing .hud-logo {
+    display: none !important;
+  }
+
+  /* El botón "SALIR" queda fijo arriba bien centrado */
+  .playing .hud-top {
+    display: block !important;
+    position: absolute !important;
+    top: 16px !important;
+    right: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* 🔥 VISIBILIDAD DE PUNTUACIONES EN MÓVIL RE-ESTRUCTURADO */
+  /* Mostramos la Puntuación Actual arriba, justo abajo del botón salir */
+  .playing .hud-score {
+    display: block !important;
+    position: absolute !important;
+    top: 68px !important;
+    right: 0 !important;
+    left: 0 !important;
+    text-align: center !important;
+  }
+  .playing .hud-score strong {
+    font-size: 26px !important;
+  }
+
+  /* Los dos bloques inferiores (MEJOR PUNTUACIÓN y CLICKS) pasan abajo en fila */
+  .playing .hud-left, 
+  .playing .hud-right {
+    display: block !important;
+    position: absolute !important;
+    bottom: 24px !important;
+    min-width: 130px !important;
+    padding: 8px 12px !important;
+    text-align: center !important;
+    background: rgba(21, 16, 12, 0.8) !important; /* fondo semiopaco para leer bien */
+  }
+
+  .playing .hud-left {
+    left: 16px !important;
+  }
+
+  .playing .hud-right {
+    right: 16px !important;
+  }
+
+  .playing .hud-left strong, 
+  .playing .hud-right strong {
+    font-size: 14px !important;
+  }
+}

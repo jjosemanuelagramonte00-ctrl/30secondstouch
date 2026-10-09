@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30 Seconds Touch - MODO DESAFÍO</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/desafio.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<script src="js/proteccion.js"></script>
+</head>
+<body class="desafio-body">
+
+  <div class="desafio-container">
+    <header class="desafio-header">
+      <h1 class="pixel-title">MODO DESAFÍO</h1>
+      <div id="dayBadge" class="day-badge">DÍA --</div>
+    </header>
+
+    <div id="challengeCard" class="challenge-card">
+      <div id="challengeIcon" class="challenge-icon">🎯</div>
+      <h2 id="challengeTitle" class="challenge-title">Cargando desafío...</h2>
+      <p id="challengeDesc" class="challenge-desc">Espera un momento mientras consultamos tu progreso diario con el cuartel general.</p>
+      
+      <div id="gameZone" class="game-zone hidden">
+        <div class="metrics-bar">
+          <div class="metric">TIEMPO: <span id="gameTimer">0.00</span></div>
+          <div class="metric" id="clickMetric">TOQUES: <span id="gameClicks">0</span>/<span id="targetClicks">0</span></div>
+        </div>
+        <div class="play-field">
+          <div id="challengeTarget" class="challenge-target"></div>
+        </div>
+      </div>
+
+      <div id="actionArea" class="action-area">
+        <button id="btnStartChallenge" class="btn-arcade">¡INICIAR RETO!</button>
+      </div>
+    </div>
+
+    <div id="lockCard" class="challenge-card hidden lock-card">
+      <div class="lock-icon">🔒</div>
+      <h2>¡RETO COMPLETADO!</h2>
+      <p>Ya dominaste el desafío de hoy de forma magistral.</p>
+      <div class="next-challenge-box">
+        <small>SIGUIENTE DESAFÍO EN:</small>
+        <div id="cooldownTimer" class="cooldown-timer">--:--:--</div>
+      </div>
+    </div>
+
+    <button onclick="window.location.href='index.html'" class="btn-back">VOLVER AL MENÚ</button>
+  </div>
+
+  <script type="module" src="js/desafio.js"></script>
+</body>
+</html>
